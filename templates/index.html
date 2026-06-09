@@ -1,650 +1,1329 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interview Question Bank</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-:root {
-  --bg:        #f0f2f7;
-  --surface:   #ffffff;
-  --border:    #e4e7ef;
-  --text:      #0f1117;
-  --muted:     #6c7491;
-  --subtle:    #9399b2;
-  --primary:   #5b5fc7;
-  --primary-h: #4a4eaa;
-  --primary-bg:#eeeffc;
-  --green:     #12b76a;
-  --green-bg:  #d1fadf;
-  --amber:     #f79009;
-  --amber-bg:  #fef3c7;
-  --blue:      #1d7aef;
-  --blue-bg:   #dbeafe;
-  --purple:    #7c3aed;
-  --purple-bg: #ede9fe;
-  --red:       #e53935;
-  --red-bg:    #ffe4e4;
-  --radius:    14px;
-  --radius-sm: 8px;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interview Question Bank</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg: #f0f2f7;
+        --surface: #ffffff;
+        --border: #e4e7ef;
+        --text: #0f1117;
+        --muted: #6c7491;
+        --subtle: #9399b2;
+        --primary: #5b5fc7;
+        --primary-h: #4a4eaa;
+        --primary-bg: #eeeffc;
+        --green: #12b76a;
+        --green-bg: #d1fadf;
+        --amber: #f79009;
+        --amber-bg: #fef3c7;
+        --blue: #1d7aef;
+        --blue-bg: #dbeafe;
+        --purple: #7c3aed;
+        --purple-bg: #ede9fe;
+        --red: #e53935;
+        --red-bg: #ffe4e4;
+        --radius: 14px;
+        --radius-sm: 8px;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font-size: 15px;
+      }
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        line-height: 1.6;
+      }
+
+      /* ── LAYOUT ── */
+      .layout {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        min-height: 100vh;
+      }
+
+      /* ── SIDEBAR ── */
+      .sidebar {
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        padding: 1.5rem 0.875rem;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 0 0.625rem 1.5rem;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--primary);
+        letter-spacing: -0.3px;
+      }
+      .logo .logo-icon {
+        width: 32px;
+        height: 32px;
+        background: var(--primary);
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+      .nav-section {
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--subtle);
+        padding: 0.75rem 0.625rem 0.4rem;
+      }
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 8px 10px;
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--muted);
+        cursor: pointer;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        transition: all 0.13s;
+      }
+      .nav-item:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
+      .nav-item.active {
+        background: var(--primary-bg);
+        color: var(--primary);
+      }
+      .nav-item i {
+        font-size: 14px;
+        width: 16px;
+        text-align: center;
+      }
+      .nav-item .pill {
+        margin-left: auto;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 1px 7px;
+        border-radius: 20px;
+        background: var(--border);
+        color: var(--muted);
+      }
+      .nav-item.active .pill {
+        background: var(--primary);
+        color: #fff;
+      }
+      .sidebar-spacer {
+        flex: 1;
+      }
+      .sidebar-footer {
+        padding: 0.75rem 0.625rem 0;
+        border-top: 1px solid var(--border);
+        margin-top: 0.75rem;
+        font-size: 12px;
+        color: var(--subtle);
+      }
+
+      /* ── MAIN ── */
+      .main {
+        padding: 2rem 2.25rem;
+        max-width: 920px;
+      }
+
+      /* ── TOPBAR ── */
+      .topbar {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 1.75rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .topbar-left h1 {
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.4px;
+        color: var(--text);
+      }
+      .topbar-left p {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 3px;
+      }
+      .btn-add {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 9px 18px;
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.14s;
+        white-space: nowrap;
+        box-shadow: 0 1px 4px rgba(91, 95, 199, 0.35);
+      }
+      .btn-add:hover {
+        background: var(--primary-h);
+      }
+
+      /* ── STATS ── */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 10px;
+        margin-bottom: 1.75rem;
+      }
+      .stat-box {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 14px 12px;
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 0.14s;
+      }
+      .stat-box:hover {
+        border-color: var(--primary);
+      }
+      .stat-num {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.1;
+      }
+      .stat-lbl {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--muted);
+        margin-top: 4px;
+        letter-spacing: 0.02em;
+      }
+      .stat-box.s-all .stat-num {
+        color: var(--primary);
+      }
+      .stat-box.s-mcq .stat-num {
+        color: var(--blue);
+      }
+      .stat-box.s-th .stat-num {
+        color: var(--green);
+      }
+      .stat-box.s-pr .stat-num {
+        color: var(--amber);
+      }
+      .stat-box.s-te .stat-num {
+        color: var(--purple);
+      }
+      .stat-box.s-bm .stat-num {
+        color: var(--red);
+      }
+
+      /* ── SEARCH BAR ── */
+      .search-bar {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 1.25rem;
+        flex-wrap: wrap;
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 220px;
+      }
+      .search-wrap i {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--subtle);
+        font-size: 13px;
+        pointer-events: none;
+      }
+      .search-wrap input {
+        width: 100%;
+        padding: 9px 12px 9px 36px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
+        background: var(--surface);
+        color: var(--text);
+        outline: none;
+        transition: border 0.14s;
+        font-family: inherit;
+      }
+      .search-wrap input:focus {
+        border-color: var(--primary);
+      }
+      .search-bar select {
+        padding: 9px 12px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        background: var(--surface);
+        color: var(--text);
+        outline: none;
+        cursor: pointer;
+        font-family: inherit;
+        min-width: 140px;
+        transition: border 0.14s;
+      }
+      .search-bar select:focus {
+        border-color: var(--primary);
+      }
+
+      /* ── QUESTION CARD ── */
+      .q-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.25rem 1.375rem;
+        margin-bottom: 10px;
+        transition:
+          box-shadow 0.18s,
+          border-color 0.18s;
+      }
+      .q-card:hover {
+        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.07);
+        border-color: #d0d3e8;
+      }
+      .q-card.is-bookmarked {
+        border-left: 3px solid var(--primary);
+      }
+
+      .card-top {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .card-type-dot {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .dot-mcq {
+        background: var(--blue-bg);
+        color: var(--blue);
+      }
+      .dot-theory {
+        background: var(--green-bg);
+        color: var(--green);
+      }
+      .dot-practical {
+        background: var(--amber-bg);
+        color: var(--amber);
+      }
+      .dot-technical {
+        background: var(--purple-bg);
+        color: var(--purple);
+      }
+
+      .card-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .card-question {
+        font-size: 14.5px;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.55;
+      }
+      .card-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 9px;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11.5px;
+        font-weight: 600;
+        padding: 2px 9px;
+        border-radius: 20px;
+      }
+      .pill-type-mcq {
+        background: var(--blue-bg);
+        color: var(--blue);
+      }
+      .pill-type-theory {
+        background: var(--green-bg);
+        color: var(--green);
+      }
+      .pill-type-practical {
+        background: var(--amber-bg);
+        color: var(--amber);
+      }
+      .pill-type-technical {
+        background: var(--purple-bg);
+        color: var(--purple);
+      }
+      .pill-company {
+        background: #f1f3f9;
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+      .pill-round {
+        background: #f1f3f9;
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+      .pill-date {
+        background: #f1f3f9;
+        color: var(--muted);
+        border: 1px solid var(--border);
+      }
+      .pill-tag {
+        background: #f1f3f9;
+        color: #4b5573;
+        font-size: 11px;
+      }
+      .pill-saved {
+        background: var(--primary-bg);
+        color: var(--primary);
+      }
+
+      .card-actions {
+        display: flex;
+        gap: 2px;
+        flex-shrink: 0;
+      }
+      .act-btn {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: none;
+        border-radius: 7px;
+        cursor: pointer;
+        color: var(--subtle);
+        font-size: 14px;
+        transition: all 0.13s;
+      }
+      .act-btn:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
+      .act-btn.saved {
+        color: var(--primary);
+      }
+      .act-btn.del:hover {
+        background: var(--red-bg);
+        color: var(--red);
+      }
+
+      /* ── MCQ OPTIONS ── */
+      .mcq-options {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+      }
+      .mcq-opt {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 8px 11px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+      }
+      .mcq-opt.right {
+        background: var(--green-bg);
+        border-color: var(--green);
+        color: #0a7a4a;
+        font-weight: 600;
+      }
+      .opt-ltr {
+        font-weight: 700;
+        font-size: 11px;
+        min-width: 18px;
+      }
+
+      /* ── ANSWER TOGGLE ── */
+      .ans-row {
+        margin-top: 11px;
+        padding-top: 11px;
+        border-top: 1px dashed var(--border);
+      }
+      .ans-btn {
+        background: none;
+        border: none;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--primary);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 0;
+        transition: color 0.13s;
+      }
+      .ans-btn:hover {
+        color: var(--primary-h);
+      }
+      .ans-box {
+    margin-top: 10px;
+    background: #f8f9fd;
+    border-left: 3px solid var(--primary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 11px 14px;
+    font-size: 13px;
+    color: var(--text);
+    display: none;
+
+    white-space: pre-wrap;
+    font-family: Consolas, Monaco, monospace;
+    overflow-x: auto;
+    tab-size: 4;
+    line-height: 1.6;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 15px; }
-body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+      .ans-box.open {
+        display: block;
+      }
 
-/* ── LAYOUT ── */
-.layout { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+      /* ── EMPTY STATE ── */
+      .empty {
+        text-align: center;
+        padding: 5rem 1rem;
+        color: var(--muted);
+      }
+      .empty-icon {
+        font-size: 52px;
+        opacity: 0.2;
+        margin-bottom: 1rem;
+      }
+      .empty h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: var(--text);
+      }
+      .empty p {
+        font-size: 13.5px;
+        color: var(--muted);
+      }
 
-/* ── SIDEBAR ── */
-.sidebar {
-  background: var(--surface); border-right: 1px solid var(--border);
-  padding: 1.5rem 0.875rem; position: sticky; top: 0; height: 100vh;
-  overflow-y: auto; display: flex; flex-direction: column;
-}
-.logo {
-  display: flex; align-items: center; gap: 9px; padding: 0 0.625rem 1.5rem;
-  font-size: 15px; font-weight: 700; color: var(--primary); letter-spacing: -0.3px;
-}
-.logo .logo-icon {
-  width: 32px; height: 32px; background: var(--primary); border-radius: 9px;
-  display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; flex-shrink: 0;
-}
-.nav-section { font-size: 10.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--subtle); padding: 0.75rem 0.625rem 0.4rem; }
-.nav-item {
-  display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: var(--radius-sm);
-  font-size: 13.5px; font-weight: 500; color: var(--muted); cursor: pointer; border: none;
-  background: none; width: 100%; text-align: left; transition: all 0.13s;
-}
-.nav-item:hover { background: var(--bg); color: var(--text); }
-.nav-item.active { background: var(--primary-bg); color: var(--primary); }
-.nav-item i { font-size: 14px; width: 16px; text-align: center; }
-.nav-item .pill {
-  margin-left: auto; font-size: 11px; font-weight: 700; padding: 1px 7px;
-  border-radius: 20px; background: var(--border); color: var(--muted);
-}
-.nav-item.active .pill { background: var(--primary); color: #fff; }
-.sidebar-spacer { flex: 1; }
-.sidebar-footer { padding: 0.75rem 0.625rem 0; border-top: 1px solid var(--border); margin-top: 0.75rem; font-size: 12px; color: var(--subtle); }
+      /* ── MODAL ── */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 12, 28, 0.5);
+        z-index: 900;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        backdrop-filter: blur(3px);
+      }
+      .overlay.open {
+        display: flex;
+      }
+      .modal {
+        background: var(--surface);
+        border-radius: var(--radius);
+        width: 100%;
+        max-width: 560px;
+        max-height: 92vh;
+        overflow-y: auto;
+        padding: 1.75rem 2rem;
+        border: 1px solid var(--border);
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18);
+      }
+      .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+      }
+      .modal-header h2 {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+      }
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 17px;
+        color: var(--subtle);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 6px;
+        transition: all 0.13s;
+      }
+      .modal-close:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
 
-/* ── MAIN ── */
-.main { padding: 2rem 2.25rem; max-width: 920px; }
+      .field {
+        margin-bottom: 14px;
+      }
+      .field > label {
+        display: block;
+        font-size: 11.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        padding: 9px 12px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
+        color: var(--text);
+        background: var(--bg);
+        outline: none;
+        transition:
+          border 0.14s,
+          background 0.14s;
+        font-family: "Inter", inherit;
+      }
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
+        border-color: var(--primary);
+        background: var(--surface);
+      }
+      .field textarea {
+        min-height: 80px;
+        resize: vertical;
+      }
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
 
-/* ── TOPBAR ── */
-.topbar { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.75rem; gap: 1rem; flex-wrap: wrap; }
-.topbar-left h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; color: var(--text); }
-.topbar-left p { font-size: 13px; color: var(--muted); margin-top: 3px; }
-.btn-add {
-  display: inline-flex; align-items: center; gap: 7px; background: var(--primary);
-  color: #fff; border: none; padding: 9px 18px; border-radius: var(--radius-sm);
-  font-size: 13.5px; font-weight: 600; cursor: pointer; transition: background 0.14s; white-space: nowrap;
-  box-shadow: 0 1px 4px rgba(91,95,199,0.35);
-}
-.btn-add:hover { background: var(--primary-h); }
+      .opt-row {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 7px;
+      }
+      .opt-row input[type="radio"] {
+        width: 15px;
+        height: 15px;
+        accent-color: var(--primary);
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+      .opt-row .ltr {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--muted);
+        min-width: 16px;
+      }
+      .opt-row input[type="text"] {
+        flex: 1;
+      }
 
-/* ── STATS ── */
-.stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 1.75rem; }
-.stat-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 12px; text-align: center; cursor: pointer; transition: border-color 0.14s; }
-.stat-box:hover { border-color: var(--primary); }
-.stat-num { font-size: 24px; font-weight: 700; line-height: 1.1; }
-.stat-lbl { font-size: 11px; font-weight: 600; color: var(--muted); margin-top: 4px; letter-spacing: 0.02em; }
-.stat-box.s-all  .stat-num { color: var(--primary); }
-.stat-box.s-mcq  .stat-num { color: var(--blue); }
-.stat-box.s-th   .stat-num { color: var(--green); }
-.stat-box.s-pr   .stat-num { color: var(--amber); }
-.stat-box.s-te   .stat-num { color: var(--purple); }
-.stat-box.s-bm   .stat-num { color: var(--red); }
+      .modal-footer {
+        display: flex;
+        gap: 9px;
+        justify-content: flex-end;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        margin-top: 1.25rem;
+      }
+      .btn-cancel {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        padding: 8px 17px;
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.13s;
+        font-family: inherit;
+      }
+      .btn-cancel:hover {
+        border-color: var(--muted);
+        color: var(--text);
+      }
+      .btn-save {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 8px 20px;
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.13s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: inherit;
+      }
+      .btn-save:hover {
+        background: var(--primary-h);
+      }
 
-/* ── SEARCH BAR ── */
-.search-bar { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
-.search-wrap { position: relative; flex: 1; min-width: 220px; }
-.search-wrap i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--subtle); font-size: 13px; pointer-events: none; }
-.search-wrap input { width: 100%; padding: 9px 12px 9px 36px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13.5px; background: var(--surface); color: var(--text); outline: none; transition: border 0.14s; font-family: inherit; }
-.search-wrap input:focus { border-color: var(--primary); }
-.search-bar select { padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; background: var(--surface); color: var(--text); outline: none; cursor: pointer; font-family: inherit; min-width: 140px; transition: border 0.14s; }
-.search-bar select:focus { border-color: var(--primary); }
+      /* ── TOAST ── */
+      .toast {
+        position: fixed;
+        bottom: 1.75rem;
+        right: 1.75rem;
+        background: #1a1d2e;
+        color: #fff;
+        padding: 11px 18px;
+        border-radius: 10px;
+        font-size: 13.5px;
+        font-weight: 500;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(8px);
+        transition:
+          opacity 0.25s,
+          transform 0.25s;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-/* ── QUESTION CARD ── */
-.q-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 1.25rem 1.375rem; margin-bottom: 10px; transition: box-shadow 0.18s, border-color 0.18s;
-}
-.q-card:hover { box-shadow: 0 2px 14px rgba(0,0,0,0.07); border-color: #d0d3e8; }
-.q-card.is-bookmarked { border-left: 3px solid var(--primary); }
+      /* ── DIVIDER ── */
+      .results-info {
+        font-size: 12px;
+        color: var(--subtle);
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
 
-.card-top { display: flex; gap: 12px; align-items: flex-start; }
-.card-type-dot {
-  width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center;
-  justify-content: center; font-size: 14px; flex-shrink: 0; margin-top: 1px;
-}
-.dot-mcq      { background: var(--blue-bg);   color: var(--blue); }
-.dot-theory   { background: var(--green-bg);  color: var(--green); }
-.dot-practical{ background: var(--amber-bg);  color: var(--amber); }
-.dot-technical{ background: var(--purple-bg); color: var(--purple); }
+      @media (max-width: 700px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          display: none;
+        }
+        .main {
+          padding: 1.25rem;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .mcq-options {
+          grid-template-columns: 1fr;
+        }
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-book-bookmark"></i></div>
+          IQ Bank
+        </div>
 
-.card-body { flex: 1; min-width: 0; }
-.card-question { font-size: 14.5px; font-weight: 600; color: var(--text); line-height: 1.55; }
-.card-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; }
-.pill {
-  display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600;
-  padding: 2px 9px; border-radius: 20px;
-}
-.pill-type-mcq       { background: var(--blue-bg);   color: var(--blue); }
-.pill-type-theory    { background: var(--green-bg);  color: var(--green); }
-.pill-type-practical { background: var(--amber-bg);  color: var(--amber); }
-.pill-type-technical { background: var(--purple-bg); color: var(--purple); }
-.pill-company { background: #f1f3f9; color: var(--muted); border: 1px solid var(--border); }
-.pill-round   { background: #f1f3f9; color: var(--muted); border: 1px solid var(--border); }
-.pill-date    { background: #f1f3f9; color: var(--muted); border: 1px solid var(--border); }
-.pill-tag     { background: #f1f3f9; color: #4b5573; font-size: 11px; }
-.pill-saved   { background: var(--primary-bg); color: var(--primary); }
+        <div class="nav-section">Browse</div>
+        <button class="nav-item active" onclick="setTab('all', this)">
+          <i class="fa-solid fa-table-list"></i> All Questions
+          <span class="pill" id="cnt-all">0</span>
+        </button>
+        <button class="nav-item" onclick="setTab('mcq', this)">
+          <i class="fa-solid fa-circle-dot" style="color: var(--blue)"></i> MCQ
+          <span class="pill" id="cnt-mcq">0</span>
+        </button>
+        <button class="nav-item" onclick="setTab('theory', this)">
+          <i class="fa-solid fa-book-open" style="color: var(--green)"></i>
+          Theory
+          <span class="pill" id="cnt-theory">0</span>
+        </button>
+        <button class="nav-item" onclick="setTab('practical', this)">
+          <i class="fa-solid fa-code" style="color: var(--amber)"></i> Practical
+          <span class="pill" id="cnt-practical">0</span>
+        </button>
+        <button class="nav-item" onclick="setTab('technical', this)">
+          <i class="fa-solid fa-microchip" style="color: var(--purple)"></i>
+          Technical
+          <span class="pill" id="cnt-technical">0</span>
+        </button>
 
-.card-actions { display: flex; gap: 2px; flex-shrink: 0; }
-.act-btn {
-  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-  border: none; background: none; border-radius: 7px; cursor: pointer; color: var(--subtle);
-  font-size: 14px; transition: all 0.13s;
-}
-.act-btn:hover { background: var(--bg); color: var(--text); }
-.act-btn.saved  { color: var(--primary); }
-.act-btn.del:hover { background: var(--red-bg); color: var(--red); }
+        <div class="nav-section">Saved</div>
+        <button class="nav-item" onclick="setTab('bookmarked', this)">
+          <i class="fa-solid fa-bookmark" style="color: var(--red)"></i>
+          Bookmarked
+          <span class="pill" id="cnt-bookmarked">0</span>
+        </button>
 
-/* ── MCQ OPTIONS ── */
-.mcq-options { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.mcq-opt {
-  display: flex; align-items: center; gap: 9px; padding: 8px 11px;
-  border-radius: var(--radius-sm); font-size: 13px; border: 1px solid var(--border); color: var(--muted);
-}
-.mcq-opt.right { background: var(--green-bg); border-color: var(--green); color: #0a7a4a; font-weight: 600; }
-.opt-ltr { font-weight: 700; font-size: 11px; min-width: 18px; }
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-footer">Data saved in questions.json</div>
+      </aside>
 
-/* ── ANSWER TOGGLE ── */
-.ans-row { margin-top: 11px; padding-top: 11px; border-top: 1px dashed var(--border); }
-.ans-btn {
-  background: none; border: none; font-size: 12.5px; font-weight: 600; color: var(--primary);
-  cursor: pointer; display: inline-flex; align-items: center; gap: 5px; padding: 0; transition: color 0.13s;
-}
-.ans-btn:hover { color: var(--primary-h); }
-.ans-box {
-  margin-top: 10px; background: #f8f9fd; border-left: 3px solid var(--primary);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 11px 14px;
-  font-size: 13px; color: var(--text); line-height: 1.75; display: none;
-  white-space: pre-wrap; font-family: 'Menlo', 'Consolas', monospace;
-}
-.ans-box.open { display: block; }
+      <!-- MAIN -->
+      <main class="main">
+        <div class="topbar">
+          <div class="topbar-left">
+            <h1>Interview Question Bank</h1>
+            <p>Store and review your interview learning — all in one place</p>
+          </div>
+          <button class="btn-add" onclick="openAdd()">
+            <i class="fa-solid fa-plus"></i> Add Question
+          </button>
+        </div>
 
-/* ── EMPTY STATE ── */
-.empty { text-align: center; padding: 5rem 1rem; color: var(--muted); }
-.empty-icon { font-size: 52px; opacity: 0.2; margin-bottom: 1rem; }
-.empty h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
-.empty p { font-size: 13.5px; color: var(--muted); }
+        <div class="stats-grid" id="stats"></div>
 
-/* ── MODAL ── */
-.overlay {
-  position: fixed; inset: 0; background: rgba(10,12,28,0.5); z-index: 900;
-  display: none; align-items: center; justify-content: center; padding: 1rem;
-  backdrop-filter: blur(3px);
-}
-.overlay.open { display: flex; }
-.modal {
-  background: var(--surface); border-radius: var(--radius); width: 100%; max-width: 560px;
-  max-height: 92vh; overflow-y: auto; padding: 1.75rem 2rem; border: 1px solid var(--border);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.18);
-}
-.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
-.modal-header h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
-.modal-close { background: none; border: none; font-size: 17px; color: var(--subtle); cursor: pointer; padding: 4px; border-radius: 6px; transition: all 0.13s; }
-.modal-close:hover { background: var(--bg); color: var(--text); }
+        <div class="search-bar">
+          <div class="search-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              type="text"
+              id="search"
+              placeholder="Search questions, companies, tags…"
+              oninput="render()"
+            />
+          </div>
+          <select id="fcompany" onchange="render()">
+            <option value="">All companies</option>
+          </select>
+          <select id="fsort" onchange="render()">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="company">By company</option>
+            <option value="az">A → Z</option>
+          </select>
+        </div>
 
-.field { margin-bottom: 14px; }
-.field > label { display: block; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 6px; }
-.field input, .field select, .field textarea {
-  width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);
-  font-size: 13.5px; color: var(--text); background: var(--bg); outline: none;
-  transition: border 0.14s, background 0.14s; font-family: 'Inter', inherit;
-}
-.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--primary); background: var(--surface); }
-.field textarea { min-height: 80px; resize: vertical; }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-.opt-row { display: flex; align-items: center; gap: 9px; margin-bottom: 7px; }
-.opt-row input[type=radio] { width: 15px; height: 15px; accent-color: var(--primary); cursor: pointer; flex-shrink: 0; }
-.opt-row .ltr { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 16px; }
-.opt-row input[type=text] { flex: 1; }
-
-.modal-footer { display: flex; gap: 9px; justify-content: flex-end; padding-top: 1.25rem; border-top: 1px solid var(--border); margin-top: 1.25rem; }
-.btn-cancel { background: var(--bg); border: 1px solid var(--border); color: var(--muted); padding: 8px 17px; border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all 0.13s; font-family: inherit; }
-.btn-cancel:hover { border-color: var(--muted); color: var(--text); }
-.btn-save { background: var(--primary); color: #fff; border: none; padding: 8px 20px; border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 600; cursor: pointer; transition: background 0.13s; display: inline-flex; align-items: center; gap: 6px; font-family: inherit; }
-.btn-save:hover { background: var(--primary-h); }
-
-/* ── TOAST ── */
-.toast {
-  position: fixed; bottom: 1.75rem; right: 1.75rem; background: #1a1d2e; color: #fff;
-  padding: 11px 18px; border-radius: 10px; font-size: 13.5px; font-weight: 500;
-  opacity: 0; pointer-events: none; transform: translateY(8px);
-  transition: opacity 0.25s, transform 0.25s; z-index: 1000;
-  display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-}
-.toast.show { opacity: 1; transform: translateY(0); }
-
-/* ── DIVIDER ── */
-.results-info { font-size: 12px; color: var(--subtle); margin-bottom: 10px; font-weight: 500; }
-
-@media (max-width: 700px) {
-  .layout { grid-template-columns: 1fr; }
-  .sidebar { display: none; }
-  .main { padding: 1.25rem; }
-  .stats-grid { grid-template-columns: repeat(3, 1fr); }
-  .mcq-options { grid-template-columns: 1fr; }
-  .two-col { grid-template-columns: 1fr; }
-}
-</style>
-</head>
-<body>
-<div class="layout">
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="logo">
-      <div class="logo-icon"><i class="fa-solid fa-book-bookmark"></i></div>
-      IQ Bank
+        <div class="results-info" id="rinfo"></div>
+        <div id="list"></div>
+      </main>
     </div>
 
-    <div class="nav-section">Browse</div>
-    <button class="nav-item active" onclick="setTab('all',this)">
-      <i class="fa-solid fa-table-list"></i> All Questions
-      <span class="pill" id="cnt-all">0</span>
-    </button>
-    <button class="nav-item" onclick="setTab('mcq',this)">
-      <i class="fa-solid fa-circle-dot" style="color:var(--blue)"></i> MCQ
-      <span class="pill" id="cnt-mcq">0</span>
-    </button>
-    <button class="nav-item" onclick="setTab('theory',this)">
-      <i class="fa-solid fa-book-open" style="color:var(--green)"></i> Theory
-      <span class="pill" id="cnt-theory">0</span>
-    </button>
-    <button class="nav-item" onclick="setTab('practical',this)">
-      <i class="fa-solid fa-code" style="color:var(--amber)"></i> Practical
-      <span class="pill" id="cnt-practical">0</span>
-    </button>
-    <button class="nav-item" onclick="setTab('technical',this)">
-      <i class="fa-solid fa-microchip" style="color:var(--purple)"></i> Technical
-      <span class="pill" id="cnt-technical">0</span>
-    </button>
+    <!-- MODAL -->
+    <div class="overlay" id="modal" onclick="overlayClick(event)">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="modal-title">Add Question</h2>
+          <button class="modal-close" onclick="closeModal()">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
 
-    <div class="nav-section">Saved</div>
-    <button class="nav-item" onclick="setTab('bookmarked',this)">
-      <i class="fa-solid fa-bookmark" style="color:var(--red)"></i> Bookmarked
-      <span class="pill" id="cnt-bookmarked">0</span>
-    </button>
+        <div class="field">
+          <label>Question *</label>
+          <textarea
+            id="f-q"
+            placeholder="Type your interview question here…"
+          ></textarea>
+        </div>
 
-    <div class="sidebar-spacer"></div>
-    <div class="sidebar-footer">Data saved in questions.json</div>
-  </aside>
+        <div class="two-col">
+          <div class="field">
+            <label>Type *</label>
+            <select id="f-type" onchange="toggleMCQ()">
+              <option value="mcq">MCQ (Multiple Choice)</option>
+              <option value="theory">Theory</option>
+              <option value="practical">Practical / Coding</option>
+              <option value="technical">Technical</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Interview Round</label>
+            <select id="f-round">
+              <option value="">— select —</option>
+              <option>Screening</option>
+              <option>Technical Round 1</option>
+              <option>Technical Round 2</option>
+              <option>HR Round</option>
+              <option>Managerial</option>
+              <option>Assignment</option>
+            </select>
+          </div>
+        </div>
 
-  <!-- MAIN -->
-  <main class="main">
-    <div class="topbar">
-      <div class="topbar-left">
-        <h1>Interview Question Bank</h1>
-        <p>Store and review your interview learning — all in one place</p>
-      </div>
-      <button class="btn-add" onclick="openAdd()">
-        <i class="fa-solid fa-plus"></i> Add Question
-      </button>
-    </div>
+        <div class="two-col">
+          <div class="field">
+            <label>Company</label>
+            <input
+              type="text"
+              id="f-company"
+              placeholder="e.g. Google, TCS, Infosys…"
+            />
+          </div>
+          <div class="field">
+            <label>Date Asked</label>
+            <input type="date" id="f-date" />
+          </div>
+        </div>
 
-    <div class="stats-grid" id="stats"></div>
+        <div id="mcq-block">
+          <div class="field">
+            <label>Options — select radio button to mark correct answer</label>
+            <div id="opts">
+              <div class="opt-row">
+                <input type="radio" name="correct" value="0" /><span class="ltr"
+                  >A</span
+                ><input type="text" class="opt-txt" placeholder="Option A" />
+              </div>
+              <div class="opt-row">
+                <input type="radio" name="correct" value="1" /><span class="ltr"
+                  >B</span
+                ><input type="text" class="opt-txt" placeholder="Option B" />
+              </div>
+              <div class="opt-row">
+                <input type="radio" name="correct" value="2" /><span class="ltr"
+                  >C</span
+                ><input type="text" class="opt-txt" placeholder="Option C" />
+              </div>
+              <div class="opt-row">
+                <input type="radio" name="correct" value="3" /><span class="ltr"
+                  >D</span
+                ><input type="text" class="opt-txt" placeholder="Option D" />
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <div class="search-bar">
-      <div class="search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="search" placeholder="Search questions, companies, tags…" oninput="render()">
-      </div>
-      <select id="fcompany" onchange="render()"><option value="">All companies</option></select>
-      <select id="fsort" onchange="render()">
-        <option value="newest">Newest first</option>
-        <option value="oldest">Oldest first</option>
-        <option value="company">By company</option>
-        <option value="az">A → Z</option>
-      </select>
-    </div>
+        <div class="field">
+          <label id="ans-label">Answer / Explanation</label>
+          <textarea
+            id="f-ans"
+            placeholder="Write the answer or explanation here…"
+          ></textarea>
+        </div>
 
-    <div class="results-info" id="rinfo"></div>
-    <div id="list"></div>
-  </main>
-</div>
+        <div class="field">
+          <label>Tags (comma-separated)</label>
+          <input
+            type="text"
+            id="f-tags"
+            placeholder="e.g. Python, OOP, Arrays, SQL"
+          />
+        </div>
 
-<!-- MODAL -->
-<div class="overlay" id="modal" onclick="overlayClick(event)">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 id="modal-title">Add Question</h2>
-      <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-
-    <div class="field">
-      <label>Question *</label>
-      <textarea id="f-q" placeholder="Type your interview question here…"></textarea>
-    </div>
-
-    <div class="two-col">
-      <div class="field">
-        <label>Type *</label>
-        <select id="f-type" onchange="toggleMCQ()">
-          <option value="mcq">MCQ (Multiple Choice)</option>
-          <option value="theory">Theory</option>
-          <option value="practical">Practical / Coding</option>
-          <option value="technical">Technical</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Interview Round</label>
-        <select id="f-round">
-          <option value="">— select —</option>
-          <option>Screening</option>
-          <option>Technical Round 1</option>
-          <option>Technical Round 2</option>
-          <option>HR Round</option>
-          <option>Managerial</option>
-          <option>Assignment</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="two-col">
-      <div class="field">
-        <label>Company</label>
-        <input type="text" id="f-company" placeholder="e.g. Google, TCS, Infosys…">
-      </div>
-      <div class="field">
-        <label>Date Asked</label>
-        <input type="date" id="f-date">
-      </div>
-    </div>
-
-    <div id="mcq-block">
-      <div class="field">
-        <label>Options — select radio button to mark correct answer</label>
-        <div id="opts">
-          <div class="opt-row"><input type="radio" name="correct" value="0"><span class="ltr">A</span><input type="text" class="opt-txt" placeholder="Option A"></div>
-          <div class="opt-row"><input type="radio" name="correct" value="1"><span class="ltr">B</span><input type="text" class="opt-txt" placeholder="Option B"></div>
-          <div class="opt-row"><input type="radio" name="correct" value="2"><span class="ltr">C</span><input type="text" class="opt-txt" placeholder="Option C"></div>
-          <div class="opt-row"><input type="radio" name="correct" value="3"><span class="ltr">D</span><input type="text" class="opt-txt" placeholder="Option D"></div>
+        <div class="modal-footer">
+          <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+          <button class="btn-save" onclick="saveQ()">
+            <i class="fa-solid fa-floppy-disk"></i> Save Question
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="field">
-      <label id="ans-label">Answer / Explanation</label>
-      <textarea id="f-ans" placeholder="Write the answer or explanation here…"></textarea>
+    <div class="toast" id="toast">
+      <i class="fa-solid fa-circle-check"></i><span id="toast-msg"></span>
     </div>
 
-    <div class="field">
-      <label>Tags (comma-separated)</label>
-      <input type="text" id="f-tags" placeholder="e.g. Python, OOP, Arrays, SQL">
-    </div>
+    <script>
+      const LETTERS = ["A", "B", "C", "D"];
+      const TYPE_ICON = {
+        mcq: "fa-circle-dot",
+        theory: "fa-book-open",
+        practical: "fa-code",
+        technical: "fa-microchip",
+      };
+      const TYPE_LABEL = {
+        mcq: "MCQ",
+        theory: "Theory",
+        practical: "Practical",
+        technical: "Technical",
+      };
+      let allData = [],
+        currentTab = "all",
+        editId = null;
 
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-      <button class="btn-save" onclick="saveQ()"><i class="fa-solid fa-floppy-disk"></i> Save Question</button>
-    </div>
-  </div>
-</div>
+      async function fetchAll() {
+        const r = await fetch("/api/questions");
+        allData = await r.json();
+        render();
+      }
 
-<div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toast-msg"></span></div>
+      function render() {
+        const q = document.getElementById("search").value.toLowerCase();
+        const fc = document.getElementById("fcompany").value;
+        const fs = document.getElementById("fsort").value;
 
-<script>
-const LETTERS = ['A','B','C','D'];
-const TYPE_ICON = { mcq:'fa-circle-dot', theory:'fa-book-open', practical:'fa-code', technical:'fa-microchip' };
-const TYPE_LABEL = { mcq:'MCQ', theory:'Theory', practical:'Practical', technical:'Technical' };
-let allData = [], currentTab = 'all', editId = null;
+        let items = [...allData];
+        if (currentTab === "bookmarked") items = items.filter((x) => x.marked);
+        else if (currentTab !== "all")
+          items = items.filter((x) => x.type === currentTab);
+        if (fc) items = items.filter((x) => x.company === fc);
+        if (q)
+          items = items.filter(
+            (x) =>
+              x.q.toLowerCase().includes(q) ||
+              (x.company || "").toLowerCase().includes(q) ||
+              (x.tags || []).join(" ").toLowerCase().includes(q) ||
+              (x.ans || "").toLowerCase().includes(q),
+          );
+        if (fs === "oldest") items.sort((a, b) => (a.date > b.date ? 1 : -1));
+        else if (fs === "newest")
+          items.sort((a, b) => (a.date < b.date ? 1 : -1));
+        else if (fs === "company")
+          items.sort((a, b) =>
+            (a.company || "").localeCompare(b.company || ""),
+          );
+        else if (fs === "az") items.sort((a, b) => a.q.localeCompare(b.q));
 
-async function fetchAll() {
-  const r = await fetch('/api/questions');
-  allData = await r.json();
-  render();
-}
+        updateStats();
+        updateCompanyFilter();
+        document.getElementById("rinfo").textContent =
+          items.length + " question" + (items.length !== 1 ? "s" : "");
 
-function render() {
-  const q = document.getElementById('search').value.toLowerCase();
-  const fc = document.getElementById('fcompany').value;
-  const fs = document.getElementById('fsort').value;
-
-  let items = [...allData];
-  if (currentTab === 'bookmarked') items = items.filter(x => x.marked);
-  else if (currentTab !== 'all') items = items.filter(x => x.type === currentTab);
-  if (fc) items = items.filter(x => x.company === fc);
-  if (q) items = items.filter(x =>
-    x.q.toLowerCase().includes(q) ||
-    (x.company||'').toLowerCase().includes(q) ||
-    (x.tags||[]).join(' ').toLowerCase().includes(q) ||
-    (x.ans||'').toLowerCase().includes(q)
-  );
-  if (fs === 'oldest') items.sort((a,b) => a.date > b.date ? 1 : -1);
-  else if (fs === 'newest') items.sort((a,b) => a.date < b.date ? 1 : -1);
-  else if (fs === 'company') items.sort((a,b) => (a.company||'').localeCompare(b.company||''));
-  else if (fs === 'az') items.sort((a,b) => a.q.localeCompare(b.q));
-
-  updateStats();
-  updateCompanyFilter();
-  document.getElementById('rinfo').textContent = items.length + ' question' + (items.length !== 1 ? 's' : '');
-
-  const list = document.getElementById('list');
-  if (!items.length) {
-    list.innerHTML = `<div class="empty">
+        const list = document.getElementById("list");
+        if (!items.length) {
+          list.innerHTML = `<div class="empty">
       <div class="empty-icon"><i class="fa-regular fa-folder-open"></i></div>
       <h3>No questions here yet</h3>
       <p>Click <strong>Add Question</strong> to start building your bank.</p>
     </div>`;
-    return;
-  }
+          return;
+        }
 
-  list.innerHTML = items.map(item => {
-    const dotClass = 'dot-' + item.type;
-    const icon = TYPE_ICON[item.type] || 'fa-question';
+        list.innerHTML = items
+          .map((item) => {
+            const dotClass = "dot-" + item.type;
+            const icon = TYPE_ICON[item.type] || "fa-question";
 
-    const optionsHtml = (item.type === 'mcq' && item.options && item.options.length)
-      ? `<div class="mcq-options">${item.options.map((o,i) =>
-          `<div class="mcq-opt ${i===item.correct?'right':''}">
+            const optionsHtml =
+              item.type === "mcq" && item.options && item.options.length
+                ? `<div class="mcq-options">${item.options
+                    .map(
+                      (o, i) =>
+                        `<div class="mcq-opt ${i === item.correct ? "right" : ""}">
             <span class="opt-ltr">${LETTERS[i]}</span>
             ${esc(o)}
-            ${i===item.correct ? '<i class="fa-solid fa-check" style="margin-left:auto;font-size:12px"></i>' : ''}
-          </div>`).join('')}</div>` : '';
+            ${i === item.correct ? '<i class="fa-solid fa-check" style="margin-left:auto;font-size:12px"></i>' : ""}
+          </div>`,
+                    )
+                    .join("")}</div>`
+                : "";
 
-    const ansHtml = item.ans
-      ? `<div class="ans-row">
+            const ansHtml = item.ans
+              ? `<div class="ans-row">
           <button class="ans-btn" onclick="toggleAns(${item.id},this)">
             <i class="fa-regular fa-eye"></i> Show Answer
           </button>
           <div class="ans-box" id="ans-${item.id}">${esc(item.ans)}</div>
-        </div>` : '';
+        </div>`
+              : "";
 
-    return `<div class="q-card ${item.marked ? 'is-bookmarked' : ''}">
+            return `<div class="q-card ${item.marked ? "is-bookmarked" : ""}">
       <div class="card-top">
         <div class="card-type-dot ${dotClass}"><i class="fa-solid ${icon}"></i></div>
         <div class="card-body">
           <div class="card-question">${esc(item.q)}</div>
           <div class="card-pills">
-            <span class="pill pill-type-${item.type}">${TYPE_LABEL[item.type]||item.type}</span>
-            ${item.company ? `<span class="pill pill-company"><i class="fa-regular fa-building" style="font-size:10px"></i> ${esc(item.company)}</span>` : ''}
-            ${item.round ? `<span class="pill pill-round"><i class="fa-solid fa-layer-group" style="font-size:10px"></i> ${esc(item.round)}</span>` : ''}
-            ${item.date ? `<span class="pill pill-date"><i class="fa-regular fa-calendar" style="font-size:10px"></i> ${fmtDate(item.date)}</span>` : ''}
-            ${(item.tags||[]).map(t=>`<span class="pill pill-tag">#${esc(t)}</span>`).join('')}
-            ${item.marked ? `<span class="pill pill-saved"><i class="fa-solid fa-bookmark" style="font-size:10px"></i> Saved</span>` : ''}
+            <span class="pill pill-type-${item.type}">${TYPE_LABEL[item.type] || item.type}</span>
+            ${item.company ? `<span class="pill pill-company"><i class="fa-regular fa-building" style="font-size:10px"></i> ${esc(item.company)}</span>` : ""}
+            ${item.round ? `<span class="pill pill-round"><i class="fa-solid fa-layer-group" style="font-size:10px"></i> ${esc(item.round)}</span>` : ""}
+            ${item.date ? `<span class="pill pill-date"><i class="fa-regular fa-calendar" style="font-size:10px"></i> ${fmtDate(item.date)}</span>` : ""}
+            ${(item.tags || []).map((t) => `<span class="pill pill-tag">#${esc(t)}</span>`).join("")}
+            ${item.marked ? `<span class="pill pill-saved"><i class="fa-solid fa-bookmark" style="font-size:10px"></i> Saved</span>` : ""}
           </div>
           ${optionsHtml}
           ${ansHtml}
         </div>
         <div class="card-actions">
-          <button class="act-btn ${item.marked?'saved':''}" onclick="toggleBookmark(${item.id})" title="${item.marked?'Remove bookmark':'Bookmark'}">
-            <i class="fa-${item.marked?'solid':'regular'} fa-bookmark"></i>
+          <button class="act-btn ${item.marked ? "saved" : ""}" onclick="toggleBookmark(${item.id})" title="${item.marked ? "Remove bookmark" : "Bookmark"}">
+            <i class="fa-${item.marked ? "solid" : "regular"} fa-bookmark"></i>
           </button>
           <button class="act-btn" onclick="openEdit(${item.id})" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
           <button class="act-btn del" onclick="deleteQ(${item.id})" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
         </div>
       </div>
     </div>`;
-  }).join('');
-}
+          })
+          .join("");
+      }
 
-function updateStats() {
-  const n = t => allData.filter(x => x.type === t).length;
-  const bm = allData.filter(x => x.marked).length;
-  ['all','mcq','theory','practical','technical','bookmarked'].forEach(t => {
-    const el = document.getElementById('cnt-' + t);
-    if (el) el.textContent = t === 'all' ? allData.length : t === 'bookmarked' ? bm : n(t);
-  });
-  document.getElementById('stats').innerHTML = `
+      function updateStats() {
+        const n = (t) => allData.filter((x) => x.type === t).length;
+        const bm = allData.filter((x) => x.marked).length;
+        [
+          "all",
+          "mcq",
+          "theory",
+          "practical",
+          "technical",
+          "bookmarked",
+        ].forEach((t) => {
+          const el = document.getElementById("cnt-" + t);
+          if (el)
+            el.textContent =
+              t === "all" ? allData.length : t === "bookmarked" ? bm : n(t);
+        });
+        document.getElementById("stats").innerHTML = `
     <div class="stat-box s-all" onclick="setTabById('all')"><div class="stat-num">${allData.length}</div><div class="stat-lbl">Total</div></div>
-    <div class="stat-box s-mcq" onclick="setTabById('mcq')"><div class="stat-num">${n('mcq')}</div><div class="stat-lbl">MCQ</div></div>
-    <div class="stat-box s-th"  onclick="setTabById('theory')"><div class="stat-num">${n('theory')}</div><div class="stat-lbl">Theory</div></div>
-    <div class="stat-box s-pr"  onclick="setTabById('practical')"><div class="stat-num">${n('practical')}</div><div class="stat-lbl">Practical</div></div>
-    <div class="stat-box s-te"  onclick="setTabById('technical')"><div class="stat-num">${n('technical')}</div><div class="stat-lbl">Technical</div></div>
+    <div class="stat-box s-mcq" onclick="setTabById('mcq')"><div class="stat-num">${n("mcq")}</div><div class="stat-lbl">MCQ</div></div>
+    <div class="stat-box s-th"  onclick="setTabById('theory')"><div class="stat-num">${n("theory")}</div><div class="stat-lbl">Theory</div></div>
+    <div class="stat-box s-pr"  onclick="setTabById('practical')"><div class="stat-num">${n("practical")}</div><div class="stat-lbl">Practical</div></div>
+    <div class="stat-box s-te"  onclick="setTabById('technical')"><div class="stat-num">${n("technical")}</div><div class="stat-lbl">Technical</div></div>
     <div class="stat-box s-bm"  onclick="setTabById('bookmarked')"><div class="stat-num">${bm}</div><div class="stat-lbl">Bookmarked</div></div>
   `;
-}
+      }
 
-function setTabById(tab) {
-  const btn = document.querySelector(`.nav-item[onclick*="'${tab}'"]`);
-  if (btn) setTab(tab, btn);
-}
+      function setTabById(tab) {
+        const btn = document.querySelector(`.nav-item[onclick*="'${tab}'"]`);
+        if (btn) setTab(tab, btn);
+      }
 
-function updateCompanyFilter() {
-  const sel = document.getElementById('fcompany');
-  const cur = sel.value;
-  const cos = [...new Set(allData.map(x => x.company).filter(Boolean))].sort();
-  sel.innerHTML = '<option value="">All companies</option>' + cos.map(c => `<option value="${esc(c)}" ${c===cur?'selected':''}>${esc(c)}</option>`).join('');
-}
+      function updateCompanyFilter() {
+        const sel = document.getElementById("fcompany");
+        const cur = sel.value;
+        const cos = [
+          ...new Set(allData.map((x) => x.company).filter(Boolean)),
+        ].sort();
+        sel.innerHTML =
+          '<option value="">All companies</option>' +
+          cos
+            .map(
+              (c) =>
+                `<option value="${esc(c)}" ${c === cur ? "selected" : ""}>${esc(c)}</option>`,
+            )
+            .join("");
+      }
 
-function setTab(tab, el) {
-  currentTab = tab;
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  render();
-}
+      function setTab(tab, el) {
+        currentTab = tab;
+        document
+          .querySelectorAll(".nav-item")
+          .forEach((b) => b.classList.remove("active"));
+        el.classList.add("active");
+        render();
+      }
 
-function toggleAns(id, btn) {
-  const box = document.getElementById('ans-' + id);
-  const open = box.classList.toggle('open');
-  btn.innerHTML = open
-    ? '<i class="fa-regular fa-eye-slash"></i> Hide Answer'
-    : '<i class="fa-regular fa-eye"></i> Show Answer';
-}
+      function toggleAns(id, btn) {
+        const box = document.getElementById("ans-" + id);
+        const open = box.classList.toggle("open");
+        btn.innerHTML = open
+          ? '<i class="fa-regular fa-eye-slash"></i> Hide Answer'
+          : '<i class="fa-regular fa-eye"></i> Show Answer';
+      }
 
-async function toggleBookmark(id) {
-  const r = await fetch(`/api/questions/${id}/bookmark`, { method: 'POST' });
-  const q = await r.json();
-  const idx = allData.findIndex(x => x.id === id);
-  if (idx > -1) allData[idx] = q;
-  render();
-  toast(q.marked ? 'Bookmarked!' : 'Bookmark removed');
-}
+      async function toggleBookmark(id) {
+        const r = await fetch(`/api/questions/${id}/bookmark`, {
+          method: "POST",
+        });
+        const q = await r.json();
+        const idx = allData.findIndex((x) => x.id === id);
+        if (idx > -1) allData[idx] = q;
+        render();
+        toast(q.marked ? "Bookmarked!" : "Bookmark removed");
+      }
 
-async function deleteQ(id) {
-  if (!confirm('Delete this question? This cannot be undone.')) return;
-  await fetch(`/api/questions/${id}`, { method: 'DELETE' });
-  allData = allData.filter(x => x.id !== id);
-  render();
-  toast('Question deleted');
-}
+      async function deleteQ(id) {
+        if (!confirm("Delete this question? This cannot be undone.")) return;
+        await fetch(`/api/questions/${id}`, { method: "DELETE" });
+        allData = allData.filter((x) => x.id !== id);
+        render();
+        toast("Question deleted");
+      }
 
-function openAdd() {
-  editId = null;
-  document.getElementById('modal-title').textContent = 'Add Question';
-  clearForm();
-  document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
-  document.getElementById('modal').classList.add('open');
-}
+      function openAdd() {
+        editId = null;
+        document.getElementById("modal-title").textContent = "Add Question";
+        clearForm();
+        document.getElementById("f-date").value = new Date()
+          .toISOString()
+          .split("T")[0];
+        document.getElementById("modal").classList.add("open");
+      }
 
-function openEdit(id) {
-  const q = allData.find(x => x.id === id);
-  if (!q) return;
-  editId = id;
-  document.getElementById('modal-title').textContent = 'Edit Question';
-  document.getElementById('f-q').value = q.q || '';
-  document.getElementById('f-type').value = q.type || 'mcq';
-  document.getElementById('f-company').value = q.company || '';
-  document.getElementById('f-date').value = q.date || '';
-  document.getElementById('f-round').value = q.round || '';
-  document.getElementById('f-ans').value = q.ans || '';
-  document.getElementById('f-tags').value = (q.tags||[]).join(', ');
-  toggleMCQ();
-  if (q.type === 'mcq' && q.options) {
-    document.querySelectorAll('.opt-txt').forEach((t,i) => t.value = q.options[i]||'');
-    document.querySelectorAll('#opts input[type=radio]').forEach((r,i) => r.checked = (i === q.correct));
-  }
-  document.getElementById('modal').classList.add('open');
-}
+      function openEdit(id) {
+        const q = allData.find((x) => x.id === id);
+        if (!q) return;
+        editId = id;
+        document.getElementById("modal-title").textContent = "Edit Question";
+        document.getElementById("f-q").value = q.q || "";
+        document.getElementById("f-type").value = q.type || "mcq";
+        document.getElementById("f-company").value = q.company || "";
+        document.getElementById("f-date").value = q.date || "";
+        document.getElementById("f-round").value = q.round || "";
+        document.getElementById("f-ans").value = q.ans || "";
+        document.getElementById("f-tags").value = (q.tags || []).join(", ");
+        toggleMCQ();
+        if (q.type === "mcq" && q.options) {
+          document
+            .querySelectorAll(".opt-txt")
+            .forEach((t, i) => (t.value = q.options[i] || ""));
+          document
+            .querySelectorAll("#opts input[type=radio]")
+            .forEach((r, i) => (r.checked = i === q.correct));
+        }
+        document.getElementById("modal").classList.add("open");
+      }
 
-function closeModal() { document.getElementById('modal').classList.remove('open'); editId = null; }
-function overlayClick(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+      function closeModal() {
+        document.getElementById("modal").classList.remove("open");
+        editId = null;
+      }
+      function overlayClick(e) {
+        if (e.target === document.getElementById("modal")) closeModal();
+      }
 
-function clearForm() {
-  ['f-q','f-company','f-ans','f-tags'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('f-type').value = 'mcq';
-  document.getElementById('f-round').value = '';
-  document.querySelectorAll('.opt-txt').forEach(i => i.value = '');
-  document.querySelectorAll('#opts input[type=radio]').forEach(i => i.checked = false);
-  toggleMCQ();
-}
+      function clearForm() {
+        ["f-q", "f-company", "f-ans", "f-tags"].forEach(
+          (id) => (document.getElementById(id).value = ""),
+        );
+        document.getElementById("f-type").value = "mcq";
+        document.getElementById("f-round").value = "";
+        document.querySelectorAll(".opt-txt").forEach((i) => (i.value = ""));
+        document
+          .querySelectorAll("#opts input[type=radio]")
+          .forEach((i) => (i.checked = false));
+        toggleMCQ();
+      }
 
-function toggleMCQ() {
-  const t = document.getElementById('f-type').value;
-  document.getElementById('mcq-block').style.display = t === 'mcq' ? 'block' : 'none';
-  document.getElementById('ans-label').textContent = t === 'mcq' ? 'Explanation' : 'Answer / Explanation';
-}
+      function toggleMCQ() {
+        const t = document.getElementById("f-type").value;
+        document.getElementById("mcq-block").style.display =
+          t === "mcq" ? "block" : "none";
+        document.getElementById("ans-label").textContent =
+          t === "mcq" ? "Explanation" : "Answer / Explanation";
+      }
 
-async function saveQ() {
-  const q = document.getElementById('f-q').value.trim();
-  if (!q) { toast('Please enter a question'); return; }
-  const type    = document.getElementById('f-type').value;
-  const company = document.getElementById('f-company').value.trim();
-  const date    = document.getElementById('f-date').value;
-  const round   = document.getElementById('f-round').value;
-  const ans     = document.getElementById('f-ans').value.trim();
-  const tags    = document.getElementById('f-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
-  let options = [], correct = -1;
-  if (type === 'mcq') {
-    options = [...document.querySelectorAll('.opt-txt')].map(i => i.value.trim());
-    const sel = document.querySelector('#opts input[type=radio]:checked');
-    correct = sel ? parseInt(sel.value) : -1;
-  }
-  const payload = { q, type, company, date, round, ans, tags, options, correct };
-  if (editId) {
-    payload.id = editId;
-    payload.marked = allData.find(x => x.id === editId)?.marked || false;
-    const r = await fetch(`/api/questions/${editId}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
-    allData[allData.findIndex(x=>x.id===editId)] = await r.json();
-    toast('Question updated!');
-  } else {
-    const r = await fetch('/api/questions', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
-    allData.push(await r.json());
-    toast('Question added!');
-  }
-  closeModal(); render();
-}
+      async function saveQ() {
+        const q = document.getElementById("f-q").value.trim();
+        if (!q) {
+          toast("Please enter a question");
+          return;
+        }
+        const type = document.getElementById("f-type").value;
+        const company = document.getElementById("f-company").value.trim();
+        const date = document.getElementById("f-date").value;
+        const round = document.getElementById("f-round").value;
+        const ans = document.getElementById("f-ans").value.trim();
+        const tags = document
+          .getElementById("f-tags")
+          .value.split(",")
+          .map((t) => t.trim())
+          .filter(Boolean);
+        let options = [],
+          correct = -1;
+        if (type === "mcq") {
+          options = [...document.querySelectorAll(".opt-txt")].map((i) =>
+            i.value.trim(),
+          );
+          const sel = document.querySelector("#opts input[type=radio]:checked");
+          correct = sel ? parseInt(sel.value) : -1;
+        }
+        const payload = {
+          q,
+          type,
+          company,
+          date,
+          round,
+          ans,
+          tags,
+          options,
+          correct,
+        };
+        if (editId) {
+          payload.id = editId;
+          payload.marked =
+            allData.find((x) => x.id === editId)?.marked || false;
+          const r = await fetch(`/api/questions/${editId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          allData[allData.findIndex((x) => x.id === editId)] = await r.json();
+          toast("Question updated!");
+        } else {
+          const r = await fetch("/api/questions", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          allData.push(await r.json());
+          toast("Question added!");
+        }
+        closeModal();
+        render();
+      }
 
-function fmtDate(d) {
-  if (!d) return '';
-  try { return new Date(d).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}); }
-  catch(e) { return d; }
-}
-function esc(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-function toast(msg) {
-  document.getElementById('toast-msg').textContent = ' ' + msg;
-  const el = document.getElementById('toast');
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 2500);
-}
+      function fmtDate(d) {
+        if (!d) return "";
+        try {
+          return new Date(d).toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          });
+        } catch (e) {
+          return d;
+        }
+      }
+      function esc(s) {
+        return String(s || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+      function toast(msg) {
+        document.getElementById("toast-msg").textContent = " " + msg;
+        const el = document.getElementById("toast");
+        el.classList.add("show");
+        setTimeout(() => el.classList.remove("show"), 2500);
+      }
 
-fetchAll();
-</script>
-</body>
+      fetchAll();
+    </script>
+  </body>
 </html>
