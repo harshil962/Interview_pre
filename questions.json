@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "q": "Which data structure uses LIFO order?",
+    "type": "mcq",
+    "company": "TCS",
+    "date": "2024-11-10",
+    "round": "Technical Round 1",
+    "options": ["Queue", "Stack", "Heap", "Tree"],
+    "correct": 1,
+    "ans": "Stack follows Last In First Out (LIFO). The last element pushed is the first to be popped.",
+    "tags": ["DSA", "Stack"],
+    "marked": false
+  },
+  {
+    "id": 2,
+    "q": "Explain the difference between == and === in JavaScript.",
+    "type": "theory",
+    "company": "Infosys",
+    "date": "2024-12-03",
+    "round": "Technical Round 1",
+    "options": [],
+    "correct": -1,
+    "ans": "== does type coercion before comparison (e.g. '5' == 5 is true). === checks value AND type strictly, so '5' === 5 is false.",
+    "tags": ["JavaScript", "Basics"],
+    "marked": false
+  },
+  {
+    "id": 3,
+    "q": "Write a Python function to find the factorial of a number using recursion.",
+    "type": "practical",
+    "company": "Wipro",
+    "date": "2025-01-15",
+    "round": "Technical Round 2",
+    "options": [],
+    "correct": -1,
+    "ans": "def factorial(n):\n    if n <= 1:\n        return 1\n    return n * factorial(n - 1)\n\nprint(factorial(5))  # Output: 120",
+    "tags": ["Python", "Recursion"],
+    "marked": true
+  },
+  {
+    "id": 4,
+    "q": "What is the time complexity of binary search?",
+    "type": "technical",
+    "company": "Google",
+    "date": "2025-02-20",
+    "round": "Technical Round 1",
+    "options": ["O(n)", "O(log n)", "O(n\u00b2)", "O(1)"],
+    "correct": 1,
+    "ans": "Binary search divides the array in half at each step, so the time complexity is O(log n). This is much faster than linear search O(n) for large sorted arrays.",
+    "tags": ["Algorithms", "Complexity"],
+    "marked": false
+  }
+]
