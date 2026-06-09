@@ -1,59 +1,87 @@
 # 📚 Interview Question Bank
 
-A local web app to store and review your interview questions.
-
-## ✅ Features
-- Add MCQ, Theory, Practical, Technical questions
-- Store company name, interview round, date, and tags
-- MCQ with 4 options + mark correct answer
-- Show/hide answers
-- Bookmark important questions
-- Search by keyword, tag, or company
-- Filter by type or company
-- Sort by newest/oldest/company/A-Z
-- Stats dashboard
-- All data saved in questions.json (your laptop, no internet needed)
+A full-stack web app to store, search and review your interview questions.
+Uses **SQLite** for storage and **Flask** for the backend.
 
 ---
 
-## 🚀 How to Run
+## 🚀 Run locally
 
-### Step 1 — Make sure Python is installed
-Open terminal / command prompt and run:
-```
-python --version
-```
-You need Python 3.7 or higher.
-
-### Step 2 — Install Flask
-```
-pip install flask
+### 1. Install dependencies
+```bash
+pip install -r requirements.txt
 ```
 
-### Step 3 — Run the app
-```
-cd interview_bank
+### 2. Start the app
+```bash
 python app.py
 ```
 
-### Step 4 — Open in browser
-Go to: **http://127.0.0.1:5000**
+### 3. Open browser
+→ http://127.0.0.1:5000
+
+Your database is created automatically as `questions.db` next to `app.py`.
 
 ---
 
-## 📁 File Structure
+## 🌐 Deploy to Render (free hosting)
+
+Render gives you a free live URL so you can use your app from anywhere.
+
+### Step 1 — Push to GitHub
+1. Create a new repo on github.com
+2. In your project folder:
+```bash
+git init
+git add .
+git commit -m "first commit"
+git remote add origin https://github.com/YOUR_USERNAME/interview-bank.git
+git push -u origin main
+```
+
+### Step 2 — Deploy on Render
+1. Go to https://render.com and sign up (free)
+2. Click **New → Web Service**
+3. Connect your GitHub repo
+4. Fill in:
+   - **Build command:** `pip install -r requirements.txt`
+   - **Start command:** `gunicorn wsgi:app`
+   - **Environment:** Python 3
+
+### Step 3 — Add a Persistent Disk (important!)
+Without a disk, your data resets on every deploy.
+
+1. In your Render service → **Disks** tab
+2. Add disk:
+   - Mount path: `/data`
+   - Size: 1 GB (free tier)
+3. Add environment variable:
+   - `DATA_DIR` = `/data`
+
+### Step 4 — Deploy
+Click **Deploy**. Your app will be live at `https://your-app.onrender.com` 🎉
+
+---
+
+## 📁 File structure
 ```
 interview_bank/
-├── app.py              ← Python backend (Flask)
-├── questions.json      ← Your questions data (auto-created)
-├── requirements.txt    ← Dependencies
+├── app.py              ← Flask backend + SQLite
+├── wsgi.py             ← Gunicorn entry point
+├── requirements.txt    ← flask, gunicorn
+├── Procfile            ← for Render/Heroku
+├── render.yaml         ← Render auto-config
+├── .env.example        ← Environment variable template
 └── templates/
-    └── index.html      ← Frontend (HTML + CSS + JS)
+    └── index.html      ← Full frontend UI
 ```
 
 ---
 
-## 💡 Tips
-- Your data is saved in `questions.json` — back it up anytime
-- The app works 100% offline on your laptop
-- To reset sample data, delete `questions.json` and restart
+## ⚙️ Environment variables
+
+| Variable   | Default     | Description                        |
+|------------|-------------|------------------------------------|
+| `DATA_DIR` | `.` (local) | Folder where questions.db is saved |
+
+Set `DATA_DIR=/data` on Render so data persists across deploys.
