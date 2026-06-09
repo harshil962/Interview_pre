@@ -516,24 +516,27 @@
         color: var(--primary-h);
       }
       .ans-box {
-        margin-top: 10px;
-        background: #f8f9fd;
-        border-left: 3px solid var(--primary);
-        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-        padding: 11px 14px;
-        font-size: 13px;
-        color: var(--text);
-        display: none;
+    margin-top: 10px;
+    display: none;
+    overflow-x: auto;
+}
 
-        white-space: pre-wrap;
-        font-family: Consolas, Monaco, monospace;
-        overflow-x: auto;
-        tab-size: 4;
-        line-height: 1.6;
-      }
-      .ans-box.open {
-        display: block;
-      }
+.ans-box.open {
+    display: block;
+}
+
+.ans-box pre {
+    margin: 0;
+    padding: 14px;
+    border-radius: 10px;
+    background: #24292e;
+    overflow-x: auto;
+}
+
+.ans-box code {
+    font-size: 14px;
+    line-height: 1.6;
+}
 
       /* ── EMPTY STATE ── */
       .empty {
@@ -755,21 +758,6 @@
         font-weight: 500;
       }
 
-      .ans-box pre {
-    margin: 0;
-    padding: 10px;
-    overflow-x: auto;
-    white-space: pre-wrap;
-    tab-size: 4;
-    font-family: Consolas, Monaco, monospace;
-    line-height: 1.6;
-    background: #f5f5f5;
-    border-radius: 6px;
-}
-
-.ans-box code {
-    display: block;
-}
       @media (max-width: 700px) {
         .layout {
           grid-template-columns: 1fr;
@@ -1077,22 +1065,21 @@
                     .join("")}</div>`
                 : "";
 
-                document.querySelectorAll('pre code').forEach((block) => {
-    hljs.highlightElement(block);
-});
+               
                 
 
             const ansHtml = item.ans
-              ? `<div class="ans-row">
-      <button class="ans-btn" onclick="toggleAns(${item.id},this)">
+  ? `
+<div class="ans-row">
+    <button class="ans-btn" onclick="toggleAns(${item.id},this)">
         <i class="fa-regular fa-eye"></i> Show Answer
-      </button>
+    </button>
 
-      <div class="ans-box" id="ans-${item.id}">
+    <div class="ans-box" id="ans-${item.id}">
         <pre><code class="language-python">${escapeCode(item.ans)}</code></pre>
-      </div>
-    </div>`
-              : "";
+    </div>
+</div>`
+  : "";
 
             return `<div class="q-card ${item.marked ? "is-bookmarked" : ""}">
       <div class="card-top">
@@ -1180,12 +1167,22 @@
       }
 
       function toggleAns(id, btn) {
-        const box = document.getElementById("ans-" + id);
-        const open = box.classList.toggle("open");
-        btn.innerHTML = open
-          ? '<i class="fa-regular fa-eye-slash"></i> Hide Answer'
-          : '<i class="fa-regular fa-eye"></i> Show Answer';
-      }
+    const box = document.getElementById("ans-" + id);
+    const open = box.classList.toggle("open");
+
+    if (open) {
+        btn.innerHTML =
+            '<i class="fa-regular fa-eye-slash"></i> Hide Answer';
+
+        // Highlight code when answer opens
+        box.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    } else {
+        btn.innerHTML =
+            '<i class="fa-regular fa-eye"></i> Show Answer';
+    }
+}
 
       async function toggleBookmark(id) {
         const r = await fetch(`/api/questions/${id}/bookmark`, {
