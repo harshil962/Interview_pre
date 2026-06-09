@@ -14,6 +14,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
     <style>
       :root {
         --bg: #f0f2f7;
@@ -747,6 +751,17 @@
         font-weight: 500;
       }
 
+      .ans-box pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: Consolas, Monaco, monospace;
+    tab-size: 4;
+}
+
+.ans-box code {
+    display: block;
+}
       @media (max-width: 700px) {
         .layout {
           grid-template-columns: 1fr;
@@ -1058,7 +1073,9 @@
           <button class="ans-btn" onclick="toggleAns(${item.id},this)">
             <i class="fa-regular fa-eye"></i> Show Answer
           </button>
-          <div class="ans-box" id="ans-${item.id}">${esc(item.ans)}</div>
+          <div class="ans-box" id="ans-${item.id}">
+    <pre><code class="language-python">${item.ans}</code></pre>
+</div>
         </div>`
               : "";
 
