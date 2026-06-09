@@ -14,10 +14,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-    <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script>hljs.highlightAll();</script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
     <style>
       :root {
         --bg: #f0f2f7;
@@ -512,21 +516,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.m
         color: var(--primary-h);
       }
       .ans-box {
-    margin-top: 10px;
-    background: #f8f9fd;
-    border-left: 3px solid var(--primary);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    padding: 11px 14px;
-    font-size: 13px;
-    color: var(--text);
-    display: none;
+        margin-top: 10px;
+        background: #f8f9fd;
+        border-left: 3px solid var(--primary);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        padding: 11px 14px;
+        font-size: 13px;
+        color: var(--text);
+        display: none;
 
-    white-space: pre-wrap;
-    font-family: Consolas, Monaco, monospace;
-    overflow-x: auto;
-    tab-size: 4;
-    line-height: 1.6;
-}
+        white-space: pre-wrap;
+        font-family: Consolas, Monaco, monospace;
+        overflow-x: auto;
+        tab-size: 4;
+        line-height: 1.6;
+      }
       .ans-box.open {
         display: block;
       }
@@ -753,10 +757,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.m
 
       .ans-box pre {
     margin: 0;
+    padding: 10px;
+    overflow-x: auto;
     white-space: pre-wrap;
-    word-wrap: break-word;
-    font-family: Consolas, Monaco, monospace;
     tab-size: 4;
+    font-family: Consolas, Monaco, monospace;
+    line-height: 1.6;
+    background: #f5f5f5;
+    border-radius: 6px;
 }
 
 .ans-box code {
@@ -956,9 +964,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.m
         <div class="field">
           <label id="ans-label">Answer / Explanation</label>
           <textarea
-            id="f-ans"
-            placeholder="Write the answer or explanation here…"
-          ></textarea>
+    id="f-ans"
+    spellcheck="false"
+    style="font-family: Consolas, monospace;"
+></textarea>
         </div>
 
         <div class="field">
@@ -1068,15 +1077,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.m
                     .join("")}</div>`
                 : "";
 
+                document.querySelectorAll('pre code').forEach((block) => {
+    hljs.highlightElement(block);
+});
+                
+
             const ansHtml = item.ans
               ? `<div class="ans-row">
-          <button class="ans-btn" onclick="toggleAns(${item.id},this)">
-            <i class="fa-regular fa-eye"></i> Show Answer
-          </button>
-          <div class="ans-box" id="ans-${item.id}">
-    <pre><code class="language-python">${item.ans}</code></pre>
-</div>
-        </div>`
+      <button class="ans-btn" onclick="toggleAns(${item.id},this)">
+        <i class="fa-regular fa-eye"></i> Show Answer
+      </button>
+
+      <div class="ans-box" id="ans-${item.id}">
+        <pre><code class="language-python">${escapeCode(item.ans)}</code></pre>
+      </div>
+    </div>`
               : "";
 
             return `<div class="q-card ${item.marked ? "is-bookmarked" : ""}">
@@ -1332,6 +1347,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.m
           .replace(/</g, "&lt;")
           .replace(/>/g, "&gt;")
           .replace(/"/g, "&quot;");
+      }
+      function escapeCode(code) {
+        return String(code || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
       }
       function toast(msg) {
         document.getElementById("toast-msg").textContent = " " + msg;
