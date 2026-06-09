@@ -131,9 +131,9 @@ def stats():
     return jsonify({"total": total, "marked": bm,
                     "by_type": {r["type"]: r["cnt"] for r in rows}})
 
+init_db()
 # ── Entry point ────────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    init_db()
     print("\n✅  Interview Question Bank is running!")
     print(f"   Database : {DB_PATH}")
     print("   Open     : http://127.0.0.1:5000\n")
